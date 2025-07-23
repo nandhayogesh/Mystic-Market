@@ -11,6 +11,7 @@ import Layout from '@/components/Layout'; // Main layout component
 import HomePage from '@/pages/HomePage';
 import ProductsPage from '@/pages/ProductsPage';
 import ProductDetailPage from '@/pages/ProductDetailPage';
+import CategoryPage from '@/pages/CategoryPage';
 import CartPage from '@/pages/CartPage';
 import AuthPage from '@/pages/AuthPage';
 import CheckoutPage from '@/pages/CheckoutPage';
@@ -54,6 +55,12 @@ function App() {
   const renderPage = () => {
     // Split the path to handle dynamic routes like /product/:id
     const pathSegments = currentPath.split('/').filter(Boolean); // Removes empty strings from split
+
+    // Handle Category Page route: /category/:categoryName
+    if (pathSegments[0] === 'category' && pathSegments[1]) {
+      const categoryName = decodeURIComponent(pathSegments[1]);
+      return <CategoryPage category={categoryName} navigateTo={navigateTo} />;
+    }
 
     // Handle Product Detail Page route: /product/:id
     if (pathSegments[0] === 'product' && pathSegments[1]) {

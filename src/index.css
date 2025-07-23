@@ -1,63 +1,59 @@
 /*
-  Magical CSS for the Diagon Alley Digital Emporium.
-  This file defines the enchanted styles, including the magical color palette,
-  mystical fonts, and animated effects for the wizarding world experience.
+  Professional CSS for the Diagon Alley Digital Emporium.
+  This file defines the refined styles, including the magical color palette,
+  elegant fonts, and subtle effects for a professional wizarding world experience.
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Magical Font Families */
-  font-family: 'Cinzel', 'MedievalSharp', serif;
+  /* Professional Font Families */
+  font-family: 'Inter', 'Cinzel', serif;
   line-height: 1.6;
   font-weight: 400;
 
-  /* Harry Potter Magical Color Palette */
-  --background: 25 25% 8%; /* Deep magical purple-black #1a1625 */
-  --foreground: 45 100% 95%; /* Warm parchment white #fef7e6 */
-  --card: 25 30% 12%; /* Dark magical purple #241e2e */
-  --card-foreground: 45 100% 95%; /* Parchment white */
-  --popover: 25 30% 12%; /* Dark magical purple */
-  --popover-foreground: 45 100% 95%; /* Parchment white */
-  --primary: 45 100% 65%; /* Golden yellow #ffd700 */
-  --primary-foreground: 25 25% 8%; /* Dark text on gold */
-  --secondary: 140 60% 45%; /* Emerald green #4ade80 */
-  --secondary-foreground: 45 100% 95%; /* Light text on green */
-  --muted: 25 20% 18%; /* Darker purple-grey #2d2436 */
-  --muted-foreground: 45 30% 70%; /* Muted parchment #b8a082 */
-  --accent: 0 70% 55%; /* Burgundy red #dc2626 */
-  --accent-foreground: 45 100% 95%; /* Light text on red */
-  --destructive: 0 84% 60%; /* Bright red for errors */
-  --destructive-foreground: 45 100% 95%; /* Light text */
-  --border: 25 25% 20%; /* Subtle purple border #332940 */
-  --input: 25 25% 20%; /* Input background */
-  --ring: 45 100% 65%; /* Golden focus ring */
+  /* Professional Harry Potter Color Palette */
+  --background: 0 0% 100%; /* Clean white background */
+  --foreground: 222 84% 4.9%; /* Dark text */
+  --card: 0 0% 100%; /* White cards */
+  --card-foreground: 222 84% 4.9%; /* Dark text on cards */
+  --popover: 0 0% 100%; /* White popover */
+  --popover-foreground: 222 84% 4.9%; /* Dark text on popover */
+  --primary: 45 100% 51%; /* Golden yellow #ffc107 */
+  --primary-foreground: 222 84% 4.9%; /* Dark text on gold */
+  --secondary: 210 40% 98%; /* Light grey */
+  --secondary-foreground: 222 84% 4.9%; /* Dark text on grey */
+  --muted: 210 40% 96%; /* Muted grey */
+  --muted-foreground: 215 16% 47%; /* Muted text */
+  --accent: 210 40% 96%; /* Accent grey */
+  --accent-foreground: 222 84% 4.9%; /* Dark text on accent */
+  --destructive: 0 84% 60%; /* Red for errors */
+  --destructive-foreground: 210 40% 98%; /* Light text on red */
+  --border: 214 32% 91%; /* Light border */
+  --input: 214 32% 91%; /* Input background */
+  --ring: 45 100% 51%; /* Golden focus ring */
 
-  /* Additional magical colors */
-  --textSecondary: 45 30% 65%; /* Aged parchment #a68b5b */
-  --surface: 25 30% 15%; /* Slightly lighter than card #2a1f35 */
-  --success: 140 60% 45%; /* Magical green #4ade80 */
-  --warning: 35 100% 50%; /* Magical amber #fbbf24 */
-  --error: 0 84% 60%; /* Magical red #ef4444 */
-  --magical-blue: 220 70% 60%; /* Mystical blue #4f8ff0 */
-  --ravenclaw-blue: 220 100% 40%; /* Ravenclaw blue #0066cc */
-  --slytherin-green: 140 100% 25%; /* Slytherin green #006600 */
-  --gryffindor-red: 0 100% 40%; /* Gryffindor red #cc0000 */
-  --hufflepuff-yellow: 45 100% 50%; /* Hufflepuff yellow #ffcc00 */
+  /* Additional professional colors */
+  --textSecondary: 215 16% 47%; /* Secondary text */
+  --surface: 210 40% 98%; /* Surface color */
+  --success: 142 76% 36%; /* Green for success */
+  --warning: 45 100% 51%; /* Amber for warnings */
+  --error: 0 84% 60%; /* Red for errors */
+  --magical-blue: 220 70% 50%; /* Professional blue */
+  --ravenclaw-blue: 220 100% 40%; /* Ravenclaw blue */
+  --slytherin-green: 140 100% 25%; /* Slytherin green */
+  --gryffindor-red: 0 100% 40%; /* Gryffindor red */
+  --hufflepuff-yellow: 45 100% 50%; /* Hufflepuff yellow */
 
-  /* Border Radius for magical elements */
-  --radius: 0.75rem;
-
-  /* Magical particle effects */
-  --sparkle-color: hsl(var(--primary));
-  --magic-glow: 0 0 20px hsl(var(--primary) / 0.5);
+  /* Border Radius */
+  --radius: 0.5rem;
 
   /* Set color scheme and base colors */
-  color-scheme: dark;
+  color-scheme: light;
   color: hsl(var(--foreground));
   background-color: hsl(var(--background));
 
@@ -68,7 +64,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Base layer for Tailwind CSS with magical enhancements */
+/* Base layer for Tailwind CSS */
 @layer base {
   * {
     @apply border-border;
@@ -76,106 +72,70 @@
   
   body {
     @apply bg-background text-foreground;
-    background-image: 
-      radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsl(var(--magical-blue) / 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, hsl(var(--secondary) / 0.05) 0%, transparent 50%);
-    background-attachment: fixed;
     min-height: 100vh;
     position: relative;
   }
 
-  /* Magical parchment texture overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffd700' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Magical headings with special fonts */
+  /* Professional headings */
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Uncial Antiqua', 'Cinzel', serif;
-    text-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+    font-family: 'Playfair Display', 'Cinzel', serif;
+    font-weight: 600;
   }
 
-  /* Magical button base styles */
+  /* Professional button styles */
   button {
-    font-family: 'Cinzel', serif;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
   }
 
-  /* Magical button hover effect */
   button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--magic-glow);
+    transform: translateY(-1px);
   }
 
-  /* Magical button click effect */
-  button:active {
-    transform: translateY(0);
-  }
-
-  /* Magical input styles */
+  /* Professional input styles */
   input, textarea, select {
-    font-family: 'Cinzel', serif;
-    background-color: hsl(var(--surface) / 0.8);
-    border: 2px solid hsl(var(--border));
-    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
   }
 
   input:focus, textarea:focus, select:focus {
     border-color: hsl(var(--primary));
-    box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
-    background-color: hsl(var(--surface));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
   }
 }
 
-/* Magical scrollbar styling */
+/* Professional scrollbar styling */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-  border-radius: 10px;
+  background: hsl(var(--muted));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--secondary)));
-  border-radius: 10px;
-  border: 2px solid hsl(var(--background));
+  background: hsl(var(--primary));
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, hsl(var(--secondary)), hsl(var(--primary)));
-  box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  background: hsl(var(--primary) / 0.8);
 }
 
-/* Magical link styling */
+/* Professional link styling */
 a {
   font-weight: 500;
   color: hsl(var(--primary));
   text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: hsl(var(--secondary));
-  text-shadow: 0 0 8px hsl(var(--primary) / 0.6);
+  color: hsl(var(--primary) / 0.8);
 }
 
-/* Magical focus styles */
+/* Professional focus styles */
 button:focus,
 button:focus-visible,
 input:focus,
@@ -183,7 +143,6 @@ textarea:focus,
 select:focus {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
-  box-shadow: 0 0 15px hsl(var(--primary) / 0.4);
 }
 
 /* Root element styling */
@@ -194,150 +153,89 @@ select:focus {
   position: relative;
 }
 
-/* Magical particle animations */
-@keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0); }
-  50% { opacity: 1; transform: scale(1); }
+/* Professional animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes slideInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 5px hsl(var(--primary) / 0.3); }
-  50% { box-shadow: 0 0 20px hsl(var(--primary) / 0.6), 0 0 30px hsl(var(--primary) / 0.4); }
+@keyframes slideInLeft {
+  from { 
+    opacity: 0; 
+    transform: translateX(-20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
 }
 
-@keyframes magical-shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+@keyframes slideInRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
 }
 
-/* Magical card hover effects */
-.magical-card {
-  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--surface)) 100%);
+/* Professional card styles */
+.professional-card {
+  background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
-.magical-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
-  transition: left 0.5s;
+.professional-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-.magical-card:hover::before {
-  left: 100%;
-}
-
-.magical-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 
-    0 10px 25px hsl(var(--background) / 0.3),
-    0 0 20px hsl(var(--primary) / 0.2);
-  border-color: hsl(var(--primary) / 0.5);
-}
-
-/* Magical button styles */
-.magical-button {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--warning)) 100%);
-  border: none;
+/* Professional button styles */
+.professional-button {
+  background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  overflow: hidden;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.magical-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+.professional-button:hover {
+  background: hsl(var(--primary) / 0.9);
 }
 
-.magical-button:hover::before {
-  left: 100%;
+/* Professional animations */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-.magical-button:hover {
-  background: linear-gradient(135deg, hsl(var(--warning)) 0%, hsl(var(--primary)) 100%);
-  box-shadow: 0 0 25px hsl(var(--primary) / 0.5);
+.animate-fade-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
 }
 
-/* Magical text effects */
-.magical-text {
-  background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: magical-shimmer 3s ease-in-out infinite;
+.animate-fade-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
 }
 
-/* Floating magical elements */
-.floating-element {
-  animation: float 3s ease-in-out infinite;
+.animate-fade-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
 }
 
-.sparkle-effect {
-  animation: sparkle 2s ease-in-out infinite;
-}
-
-/* Magical loading spinner */
-.magical-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid hsl(var(--border));
-  border-top: 3px solid hsl(var(--primary));
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Magical form styles */
-.magical-form {
-  background: linear-gradient(135deg, hsl(var(--card) / 0.8) 0%, hsl(var(--surface) / 0.8) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  padding: 2rem;
-  box-shadow: 0 8px 32px hsl(var(--background) / 0.3);
-}
-
-/* Magical transitions */
-.page-transition {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.animate-slide-in-bottom {
+  animation: slideInUp 0.4s ease-out forwards;
 }
 
 /* House-specific color classes */
@@ -346,46 +244,29 @@ select:focus {
 .ravenclaw { color: hsl(var(--ravenclaw-blue)); }
 .hufflepuff { color: hsl(var(--hufflepuff-yellow)); }
 
-/* Magical notification styles */
-.magical-toast {
-  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--surface)) 100%);
-  border: 1px solid hsl(var(--primary) / 0.3);
-  box-shadow: 0 8px 25px hsl(var(--background) / 0.4), 0 0 15px hsl(var(--primary) / 0.2);
-  backdrop-filter: blur(10px);
-}
-
-/* Magical product grid */
+/* Professional product grid */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 2rem 0;
+  gap: 1.5rem;
+  padding: 1rem 0;
 }
 
-/* Responsive magical adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .magical-card:hover {
-    transform: translateY(-4px) scale(1.01);
+    gap: 1rem;
   }
 }
 
-/* Magical cursor effects */
-.magical-cursor {
-  cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z' fill='%23ffd700'/%3E%3C/svg%3E") 12 12, auto;
-}
-
-/* Magical selection highlight */
+/* Professional selection highlight */
 ::selection {
-  background: hsl(var(--primary) / 0.3);
+  background: hsl(var(--primary) / 0.2);
   color: hsl(var(--foreground));
 }
 
 ::-moz-selection {
-  background: hsl(var(--primary) / 0.3);
+  background: hsl(var(--primary) / 0.2);
   color: hsl(var(--foreground));
 }

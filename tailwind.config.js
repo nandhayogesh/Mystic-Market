@@ -48,7 +48,7 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        // Magical Harry Potter colors
+        // Professional Harry Potter colors
         textSecondary: 'hsl(var(--textSecondary))',
         surface: 'hsl(var(--surface))',
         success: 'hsl(var(--success))',
@@ -61,8 +61,8 @@ export default {
         hufflepuffYellow: 'hsl(var(--hufflepuff-yellow))',
       },
       fontFamily: {
-        'magical': ['Uncial Antiqua', 'Cinzel', 'serif'],
-        'medieval': ['MedievalSharp', 'Cinzel', 'serif'],
+        'display': ['Playfair Display', 'Cinzel', 'serif'],
+        'body': ['Inter', 'sans-serif'],
         'cinzel': ['Cinzel', 'serif'],
       },
       keyframes: {
@@ -74,32 +74,11 @@ export default {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
-        // Magical animations
-        'sparkle': {
-          '0%, 100%': { opacity: '0', transform: 'scale(0)' },
-          '50%': { opacity: '1', transform: 'scale(1)' },
-        },
-        'float': {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-        'magical-glow': {
-          '0%, 100%': { boxShadow: '0 0 5px hsl(var(--primary) / 0.3)' },
-          '50%': { boxShadow: '0 0 20px hsl(var(--primary) / 0.6), 0 0 30px hsl(var(--primary) / 0.4)' },
-        },
-        'shimmer': {
-          '0%': { backgroundPosition: '-200% center' },
-          '100%': { backgroundPosition: '200% center' },
-        },
         'fade-in': {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
-        'slide-in-top': {
-          from: { transform: 'translateY(-20px)', opacity: '0' },
-          to: { transform: 'translateY(0)', opacity: '1' },
-        },
-        'slide-in-bottom': {
+        'slide-in-up': {
           from: { transform: 'translateY(20px)', opacity: '0' },
           to: { transform: 'translateY(0)', opacity: '1' },
         },
@@ -111,55 +90,19 @@ export default {
           from: { transform: 'translateX(20px)', opacity: '0' },
           to: { transform: 'translateX(0)', opacity: '1' },
         },
-        'zoom-in': {
-          from: { transform: 'scale(0.95)', opacity: '0' },
-          to: { transform: 'scale(1)', opacity: '1' },
-        },
-        'magical-pulse': {
-          '0%, 100%': { transform: 'scale(1)', opacity: '1' },
-          '50%': { transform: 'scale(1.05)', opacity: '0.8' },
-        },
-        'wand-wave': {
-          '0%, 100%': { transform: 'rotate(0deg)' },
-          '25%': { transform: 'rotate(10deg)' },
-          '75%': { transform: 'rotate(-10deg)' },
-        },
-        'cauldron-bubble': {
-          '0%, 100%': { transform: 'translateY(0px) scale(1)' },
-          '50%': { transform: 'translateY(-5px) scale(1.1)' },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        // Magical animations
-        'sparkle': 'sparkle 2s ease-in-out infinite',
-        'float': 'float 3s ease-in-out infinite',
-        'magical-glow': 'magical-glow 2s ease-in-out infinite',
-        'shimmer': 'shimmer 3s ease-in-out infinite',
         'fade-in': 'fade-in 0.6s ease-out forwards',
-        'fade-in-delay': 'fade-in 0.8s ease-out 0.3s forwards',
-        'fade-in-up': 'slide-in-bottom 0.8s ease-out forwards',
-        'fade-in-left': 'slide-in-left 0.8s ease-out forwards',
-        'fade-in-right': 'slide-in-right 0.8s ease-out forwards',
-        'slide-in-top': 'slide-in-top 0.8s ease-out forwards',
-        'slide-in-bottom': 'slide-in-bottom 0.6s ease-out forwards',
-        'slide-in-right': 'slide-in-right 0.6s ease-out forwards',
-        'zoom-in': 'zoom-in 0.6s ease-out forwards',
-        'magical-pulse': 'magical-pulse 2s ease-in-out infinite',
-        'wand-wave': 'wand-wave 1s ease-in-out',
-        'cauldron-bubble': 'cauldron-bubble 1.5s ease-in-out infinite',
-      },
-      backgroundImage: {
-        'magical-gradient': 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%)',
-        'parchment': 'linear-gradient(45deg, hsl(var(--card)) 0%, hsl(var(--surface)) 100%)',
-        'hogwarts': 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--surface)) 100%)',
+        'fade-in-up': 'slide-in-up 0.6s ease-out forwards',
+        'fade-in-left': 'slide-in-left 0.6s ease-out forwards',
+        'fade-in-right': 'slide-in-right 0.6s ease-out forwards',
+        'slide-in-bottom': 'slide-in-up 0.4s ease-out forwards',
       },
       boxShadow: {
-        'magical': '0 8px 32px hsl(var(--primary) / 0.15), 0 0 20px hsl(var(--primary) / 0.1)',
-        'magical-lg': '0 12px 40px hsl(var(--primary) / 0.2), 0 0 30px hsl(var(--primary) / 0.15)',
-        'glow': '0 0 20px hsl(var(--primary) / 0.4)',
-        'glow-lg': '0 0 30px hsl(var(--primary) / 0.5), 0 0 60px hsl(var(--primary) / 0.3)',
+        'professional': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+        'professional-lg': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
       },
     },
   },

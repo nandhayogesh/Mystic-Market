@@ -1,5 +1,5 @@
 /*
-  This file contains all the magical data structures and sample data
+  This file contains all the data structures and sample data
   for the Diagon Alley Digital Emporium wizarding products store.
   This data is used for in-memory state management via React Context.
 */
@@ -21,7 +21,7 @@ export interface Product {
 }
 
 export interface CartItem extends Product {
-  cartQuantity: number; // Quantity of this product in the user's magical cauldron
+  cartQuantity: number; // Quantity of this product in the user's cart
 }
 
 export interface User {
@@ -50,7 +50,7 @@ export interface Address {
 
 export interface PaymentMethod {
   id: string;
-  type: 'Galleons' | 'Sickles & Knuts' | 'Muggle Card' | 'Gringotts Transfer';
+  type: 'Credit Card' | 'Debit Card' | 'Net Banking' | 'Cash on Delivery';
   last4?: string;
   bankName?: string;
 }
@@ -60,21 +60,21 @@ export interface Order {
   userId: string;
   items: { productId: string; name: string; price: number; quantity: number; image: string }[];
   total: number;
-  status: 'Brewing' | 'Enchanting' | 'Owl Delivery' | 'Delivered' | 'Cursed';
+  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
   orderDate: string;
   deliveryAddress: Address;
   deliverySlot: { date: string; time: string };
   paymentMethod: PaymentMethod['type'];
-  deliveryMethod?: 'Standard Owl Post' | 'Express Phoenix Delivery' | 'Floo Network';
+  deliveryMethod?: 'Standard Delivery' | 'Express Delivery' | 'Next Day Delivery';
 }
 
 export interface AutoReplenishmentSetting {
   productId: string;
-  frequency: 'weekly' | 'monthly' | 'termly';
+  frequency: 'weekly' | 'monthly' | 'quarterly';
   quantity: number;
 }
 
-// --- Magical Product Data ---
+// --- Product Data ---
 
 export const MOCK_PRODUCTS: Product[] = [
   // Wands Category - "Ollivanders Fine Wands"
@@ -84,7 +84,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Wands',
     price: 2500.00,
     quantity: 1,
-    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'The most powerful wand ever made, crafted from elder wood with a Thestral tail hair core. 15 inches of pure magical supremacy. Also known as the Deathstick, this legendary wand has passed through many hands throughout history.',
     rating: 5.0,
     reviews: [
@@ -100,7 +100,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Wands',
     price: 45.00,
     quantity: 25,
-    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: '11 inches, holly wood with phoenix feather core. Supple and excellent for charm work. The brother wand to Voldemort\'s, sharing the same phoenix feather core from Fawkes.',
     rating: 4.9,
     reviews: [
@@ -116,7 +116,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Wands',
     price: 42.00,
     quantity: 30,
-    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: '10¾ inches, vine wood with dragon heartstring core. Perfect for complex spellwork and transfiguration. Vine wands are drawn to witches and wizards who seek a greater purpose.',
     rating: 4.8,
     reviews: [
@@ -132,7 +132,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Wands',
     price: 75.00,
     quantity: 100,
-    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Create your perfect wand! Choose from various woods (oak, willow, ebony, holly) and cores (phoenix feather, dragon heartstring, unicorn hair). Each wand is unique and chooses its wizard.',
     rating: 4.7,
     reviews: [
@@ -150,7 +150,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Potions',
     price: 500.00,
     quantity: 5,
-    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'The most coveted potion in the wizarding world. Brings extraordinary luck for 12 hours. Golden in color and incredibly difficult to brew. Use sparingly - too much can cause giddiness and dangerous overconfidence.',
     rating: 5.0,
     reviews: [
@@ -166,7 +166,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Potions',
     price: 150.00,
     quantity: 12,
-    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Transform into anyone for one hour. Requires a piece of the person you wish to become. Thick, mudlike consistency with a taste that varies depending on the person being impersonated.',
     rating: 4.6,
     reviews: [
@@ -182,7 +182,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Potions',
     price: 85.00,
     quantity: 20,
-    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'The most powerful love potion in existence. Creates powerful infatuation and obsession. Smells different to each person according to what attracts them most. Pearl-sheen, steam rises in spirals.',
     rating: 4.3,
     reviews: [
@@ -198,7 +198,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Potions',
     price: 125.00,
     quantity: 35,
-    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Everything needed to start brewing potions! Includes pewter cauldron, brass scales, glass phials, and essential ingredients like dried nettles, snake fangs, and porcupine quills.',
     rating: 4.8,
     reviews: [
@@ -216,7 +216,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Flying Equipment',
     price: 1200.00,
     quantity: 8,
-    image: 'https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'The fastest racing broom ever created. 0-150mph in 10 seconds with unparalleled precision and control. Handcrafted with ash wood handle and birch twigs. The choice of professional Quidditch players worldwide.',
     rating: 5.0,
     reviews: [
@@ -232,7 +232,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Flying Equipment',
     price: 800.00,
     quantity: 15,
-    image: 'https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'The broom that dominated Quidditch before the Firebolt. Excellent acceleration and handling. Mahogany handle with superior balance. Used by the Slytherin Quidditch team.',
     rating: 4.7,
     reviews: [
@@ -248,7 +248,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Flying Equipment',
     price: 75.00,
     quantity: 50,
-    image: 'https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Official Quidditch Golden Snitch with flesh memory. Remembers the first person to touch it. Comes with practice Snitches for training. Essential for any Quidditch match or practice session.',
     rating: 4.9,
     reviews: [
@@ -266,7 +266,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Magical Foods',
     price: 8.50,
     quantity: 100,
-    image: 'https://images.pexels.com/photos/8111358/pexels-photo-8111358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Delicious chocolate frogs that hop around until eaten! Each comes with a collectible Famous Witches and Wizards card. Collect them all! Made with the finest magical chocolate.',
     rating: 4.8,
     reviews: [
@@ -282,7 +282,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Magical Foods',
     price: 6.25,
     quantity: 80,
-    image: 'https://images.pexels.com/photos/8111358/pexels-photo-8111358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Risk it all with these magical jelly beans! Flavors include chocolate, peppermint, and liver, tripe, earwax, spinach, and worse! You never know what you\'re going to get.',
     rating: 4.2,
     reviews: [
@@ -298,7 +298,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Magical Foods',
     price: 4.50,
     quantity: 200,
-    image: 'https://images.pexels.com/photos/8111358/pexels-photo-8111358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'The wizarding world\'s favorite beverage! Warming, butterscotch-flavored drink with a slight alcoholic content. Perfect for cold days in Hogsmeade. Served hot or cold with foam on top.',
     rating: 4.9,
     reviews: [
@@ -316,7 +316,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Magical Accessories',
     price: 1500.00,
     quantity: 3,
-    image: 'https://images.pexels.com/photos/8111359/pexels-photo-8111359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'True invisibility cloak woven from Demiguise hair. Provides complete invisibility and is resistant to most revealing charms. One size fits all. Passed down through generations of the Potter family.',
     rating: 5.0,
     reviews: [
@@ -332,7 +332,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Magical Accessories',
     price: 250.00,
     quantity: 10,
-    image: 'https://images.pexels.com/photos/8111359/pexels-photo-8111359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'I solemnly swear I am up to no good. This magical map shows every person\'s location within Hogwarts, including secret passages. Created by Messrs. Moony, Wormtail, Padfoot, and Prongs.',
     rating: 4.9,
     reviews: [
@@ -348,7 +348,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Magical Accessories',
     price: 2000.00,
     quantity: 2,
-    image: 'https://images.pexels.com/photos/8111359/pexels-photo-8111359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Extremely rare magical device that allows the user to travel back in time up to 5 hours. Requires special Ministry permission. Golden hourglass pendant on a long chain. Use with extreme caution.',
     rating: 5.0,
     reviews: [
@@ -366,7 +366,7 @@ export const MOCK_PRODUCTS: Product[] = [
     category: 'Dark Arts Defense',
     price: 180.00,
     quantity: 25,
-    image: 'https://images.pexels.com/photos/8111360/pexels-photo-8111360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'https://images.pexels.com/photos/6980869/pexels-photo-6980869.jpeg?auto=compress&cs=tinysrgb&w=800',
     description: 'Complete collection of protective charms and amulets. Includes Protean Charm items, Shield Charm enhancers, and anti-jinx accessories. Essential for anyone facing dark magic threats.',
     rating: 4.7,
     reviews: [
@@ -389,10 +389,10 @@ export const MOCK_USERS: User[] = [
       { id: crypto.randomUUID(), street: 'Gryffindor Tower', city: 'Hogwarts', state: 'Scotland', zip: 'H0G 1W4', country: 'UK', magicalLocation: 'Hogwarts School of Witchcraft and Wizardry' },
     ],
     paymentMethods: [
-      { id: crypto.randomUUID(), type: 'Galleons', bankName: 'Gringotts Wizarding Bank' },
-      { id: crypto.randomUUID(), type: 'Muggle Card', last4: '4242' },
+      { id: crypto.randomUUID(), type: 'Credit Card', last4: '4242' },
+      { id: crypto.randomUUID(), type: 'Debit Card', last4: '1234' },
     ],
-    loyaltyStatus: 'Order of Merlin - First Class',
+    loyaltyStatus: 'Gold Member',
     autoReplenishment: [
       { productId: MOCK_PRODUCTS.find(p => p.name === 'Butterbeer')?.id || '', frequency: 'weekly', quantity: 6 },
     ],
@@ -423,8 +423,8 @@ export const MOCK_ORDERS: Order[] = [
     status: 'Delivered',
     orderDate: '2024-07-20',
     deliveryAddress: MOCK_USERS[0].addresses[1],
-    deliverySlot: { date: '2024-07-21', time: 'Morning Owl Post' },
-    paymentMethod: 'Galleons',
-    deliveryMethod: 'Express Phoenix Delivery',
+    deliverySlot: { date: '2024-07-21', time: '09:00 AM - 11:00 AM' },
+    paymentMethod: 'Credit Card',
+    deliveryMethod: 'Express Delivery',
   },
 ];

@@ -2,31 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 2L19.09 10.26L28 11L21 18L22.18 29L16 25.77L9.82 29L11 18L4 11L12.91 10.26L16 2Z' fill='%23ffd700'/%3E%3C/svg%3E" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 2L19.09 10.26L28 11L21 18L22.18 29L16 25.77L9.82 29L11 18L4 11L12.91 10.26L16 2Z' fill='%23ffc107'/%3E%3C/svg%3E" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>⚡ Diagon Alley Digital Emporium - Finest Magical Supplies</title>
+    <title>Diagon Alley Digital Emporium - Finest Magical Supplies</title>
     <meta name="description" content="Welcome to Diagon Alley Digital Emporium - Your premier destination for magical supplies, enchanted artifacts, wands, potions, and wizarding essentials. Serving the magical community since 1692." />
     <meta name="keywords" content="magic, wands, potions, Hogwarts, wizarding, magical supplies, Diagon Alley, Harry Potter, enchanted items" />
     
-    <!-- Magical Fonts -->
+    <!-- Professional Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Magical Cursor -->
     <style>
-      body {
-        cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z' fill='%23ffd700'/%3E%3C/svg%3E") 12 12, auto;
-      }
-      
       /* Loading animation */
-      .magical-loading {
+      .loading-screen {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #1a1625 0%, #241e2e 50%, #2a1f35 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -34,17 +29,16 @@
         transition: opacity 0.5s ease-out;
       }
       
-      .magical-spinner {
-        width: 60px;
-        height: 60px;
-        border: 4px solid #332940;
-        border-top: 4px solid #ffd700;
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid #e9ecef;
+        border-top: 3px solid #ffc107;
         border-radius: 50%;
-        animation: magical-spin 1s linear infinite;
-        box-shadow: 0 0 20px #ffd700;
+        animation: spin 1s linear infinite;
       }
       
-      @keyframes magical-spin {
+      @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
@@ -52,24 +46,24 @@
       .loading-text {
         position: absolute;
         bottom: 30%;
-        font-family: 'Cinzel', serif;
-        color: #ffd700;
-        font-size: 1.2rem;
-        animation: magical-pulse 2s ease-in-out infinite;
+        font-family: 'Inter', sans-serif;
+        color: #6c757d;
+        font-size: 1rem;
+        animation: pulse 2s ease-in-out infinite;
       }
       
-      @keyframes magical-pulse {
+      @keyframes pulse {
         0%, 100% { opacity: 0.7; }
         50% { opacity: 1; }
       }
     </style>
   </head>
   <body>
-    <!-- Magical Loading Screen -->
-    <div id="magical-loading" class="magical-loading">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
       <div>
-        <div class="magical-spinner"></div>
-        <div class="loading-text">Casting magical spells...</div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading magical supplies...</div>
       </div>
     </div>
     
@@ -80,14 +74,14 @@
     <script>
       window.addEventListener('load', function() {
         setTimeout(function() {
-          const loading = document.getElementById('magical-loading');
+          const loading = document.getElementById('loading-screen');
           if (loading) {
             loading.style.opacity = '0';
             setTimeout(function() {
               loading.style.display = 'none';
             }, 500);
           }
-        }, 1500); // Show loading for 1.5 seconds
+        }, 1000);
       });
     </script>
   </body>
