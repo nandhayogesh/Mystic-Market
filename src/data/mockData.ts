@@ -1,11 +1,10 @@
 /*
-  This file contains all the mock data structures and sample data
-  for the grocery store application. This data is used for in-memory
-  state management via React Context.
+  This file contains all the magical data structures and sample data
+  for the Diagon Alley Digital Emporium wizarding products store.
+  This data is used for in-memory state management via React Context.
 */
 
 // Using crypto.randomUUID() for unique IDs, available in modern browsers.
-// No need for external 'uuid' package.
 
 export interface Product {
   id: string;
@@ -17,21 +16,26 @@ export interface Product {
   description: string;
   rating: number;
   reviews: { user: string; comment: string; rating: number }[];
+  magicalProperties?: string; // Special magical properties
+  spellLevel?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Master';
 }
 
 export interface CartItem extends Product {
-  cartQuantity: number; // Quantity of this product in the user's cart
+  cartQuantity: number; // Quantity of this product in the user's magical cauldron
 }
 
 export interface User {
   id: string;
   name: string;
   email: string;
-  password?: string; // For mock authentication purposes only. In a real app, passwords should be hashed.
+  password?: string; // For mock authentication purposes only
   addresses: Address[];
   paymentMethods: PaymentMethod[];
   loyaltyStatus: string;
   autoReplenishment: AutoReplenishmentSetting[];
+  hogwartsHouse?: 'Gryffindor' | 'Slytherin' | 'Hufflepuff' | 'Ravenclaw';
+  wizardLevel?: number;
+  wandType?: string;
 }
 
 export interface Address {
@@ -41,13 +45,14 @@ export interface Address {
   state: string;
   zip: string;
   country: string;
+  magicalLocation?: string; // e.g., "Near the Leaky Cauldron"
 }
 
 export interface PaymentMethod {
   id: string;
-  type: 'Credit Card' | 'Debit Card' | 'Net Banking' | 'Cash on Delivery';
-  last4?: string; // For card types, last 4 digits
-  bankName?: string; // For net banking
+  type: 'Galleons' | 'Sickles & Knuts' | 'Muggle Card' | 'Gringotts Transfer';
+  last4?: string;
+  bankName?: string;
 }
 
 export interface Order {
@@ -55,265 +60,355 @@ export interface Order {
   userId: string;
   items: { productId: string; name: string; price: number; quantity: number; image: string }[];
   total: number;
-  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
-  orderDate: string; // YYYY-MM-DD format
+  status: 'Brewing' | 'Enchanting' | 'Owl Delivery' | 'Delivered' | 'Cursed';
+  orderDate: string;
   deliveryAddress: Address;
   deliverySlot: { date: string; time: string };
   paymentMethod: PaymentMethod['type'];
+  deliveryMethod?: 'Standard Owl Post' | 'Express Phoenix Delivery' | 'Floo Network';
 }
 
 export interface AutoReplenishmentSetting {
   productId: string;
-  frequency: 'weekly' | 'bi-weekly' | 'monthly';
+  frequency: 'weekly' | 'monthly' | 'termly';
   quantity: number;
 }
 
-// --- Mock Data ---
+// --- Magical Product Data ---
 
 export const MOCK_PRODUCTS: Product[] = [
+  // Wands Category - "Ollivanders Fine Wands"
   {
     id: crypto.randomUUID(),
-    name: 'Organic Gala Apples (1kg)',
-    category: 'Fruits & Vegetables',
-    price: 3.99,
-    quantity: 50,
-    image: 'https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Fresh, crisp organic Gala apples, perfect for snacking or baking. Sourced from local farms, ensuring peak freshness and flavor.',
-    rating: 4.8,
+    name: 'The Elder Wand',
+    category: 'Wands',
+    price: 2500.00,
+    quantity: 1,
+    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'The most powerful wand ever made, crafted from elder wood with a Thestral tail hair core. 15 inches of pure magical supremacy. Also known as the Deathstick, this legendary wand has passed through many hands throughout history.',
+    rating: 5.0,
     reviews: [
-      { user: 'Alice W.', comment: 'Very fresh and tasty! My kids love them.', rating: 5 },
-      { user: 'Bob M.', comment: 'Good quality, a bit pricey but worth it for organic.', rating: 4 },
+      { user: 'Albus Dumbledore', comment: 'Unparalleled power, but use with great wisdom.', rating: 5 },
+      { user: 'Gellert Grindelwald', comment: 'The ultimate magical instrument.', rating: 5 },
     ],
+    magicalProperties: 'Unbeatable in duels, amplifies all spells',
+    spellLevel: 'Master',
   },
   {
     id: crypto.randomUUID(),
-    name: 'Artisan Whole Wheat Bread',
-    category: 'Bakery',
-    price: 4.50,
-    quantity: 30,
-    image: 'https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Freshly baked artisan whole wheat bread, with a hearty crust and soft interior. Ideal for sandwiches or toast.',
-    rating: 4.5,
-    reviews: [
-      { user: 'Charlie P.', comment: 'Soft and delicious! Tastes homemade.', rating: 5 },
-      { user: 'Diana R.', comment: 'A bit dense, but good for a healthy option.', rating: 4 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Farm Fresh Milk (1 Liter)',
-    category: 'Dairy & Eggs',
-    price: 1.80,
-    quantity: 100,
-    image: 'https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Pasteurized and homogenized full-fat milk from local dairies. Rich in calcium and vitamins.',
-    rating: 4.7,
-    reviews: [
-      { user: 'David L.', comment: 'Essential for my coffee and cereals. Always fresh.', rating: 4 },
-      { user: 'Emily S.', comment: 'Great taste, good value for money.', rating: 5 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Premium Basmati Rice (5kg)',
-    category: 'Grains & Pasta',
-    price: 12.00,
-    quantity: 20,
-    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Premium long-grain Basmati rice, known for its aromatic fragrance and fluffy texture when cooked. Perfect for various cuisines.',
-    rating: 4.9,
-    reviews: [
-      { user: 'Eve K.', comment: 'Best rice for biryani! Highly recommend.', rating: 5 },
-      { user: 'Frank G.', comment: 'Consistently good quality. Cooks perfectly every time.', rating: 5 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Boneless Chicken Breast (500g)',
-    category: 'Meat & Seafood',
-    price: 7.50,
-    quantity: 40,
-    image: 'https://images.pexels.com/photos/616335/pexels-photo-616335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Fresh, boneless, skinless chicken breast. Lean and versatile, ideal for grilling, baking, or stir-frying.',
-    rating: 4.6,
-    reviews: [
-      { user: 'Grace H.', comment: 'Always fresh and tender. A staple in my kitchen.', rating: 5 },
-      { user: 'Henry J.', comment: 'Good portion size for the price.', rating: 4 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Fresh Atlantic Salmon Fillet (200g)',
-    category: 'Meat & Seafood',
-    price: 9.99,
-    quantity: 15,
-    image: 'https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'High-quality Atlantic salmon fillet, rich in Omega-3 fatty acids. Perfect for a healthy and delicious meal.',
-    rating: 4.8,
-    reviews: [
-      { user: 'Isabel L.', comment: 'Perfect for grilling! Tastes amazing.', rating: 5 },
-      { user: 'Jack M.', comment: 'Very fresh, no fishy smell.', rating: 5 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Organic Brown Eggs (1 Dozen)',
-    category: 'Dairy & Eggs',
-    price: 4.20,
-    quantity: 60,
-    image: 'https://images.pexels.com/photos/162712/egg-yolk-chicken-egg-egg-white-162712.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Farm-fresh organic brown eggs, large size. Sourced from free-range hens.',
-    rating: 4.7,
-    reviews: [
-      { user: 'Karen N.', comment: 'Great for breakfast, always reliable.', rating: 4 },
-      { user: 'Leo O.', comment: 'Good quality and taste.', rating: 5 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Fresh Baby Spinach (500g)',
-    category: 'Fruits & Vegetables',
-    price: 2.10,
-    quantity: 70,
-    image: 'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Fresh baby spinach, pre-washed and ready to use. Ideal for salads, smoothies, or cooking.',
-    rating: 4.6,
-    reviews: [
-      { user: 'Mia P.', comment: 'Good for smoothies and salads. Very convenient.', rating: 5 },
-      { user: 'Noah Q.', comment: 'Always fresh and vibrant.', rating: 4 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Extra Virgin Olive Oil (1 Liter)',
-    category: 'Pantry Staples',
-    price: 15.00,
+    name: "Harry Potter's Holly Wand",
+    category: 'Wands',
+    price: 45.00,
     quantity: 25,
-    image: 'https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Premium extra virgin olive oil, cold-pressed from the finest olives. Perfect for cooking, dressings, and dipping.',
+    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: '11 inches, holly wood with phoenix feather core. Supple and excellent for charm work. The brother wand to Voldemort\'s, sharing the same phoenix feather core from Fawkes.',
     rating: 4.9,
     reviews: [
-      { user: 'Olivia R.', comment: 'High quality, worth the price. Excellent flavor.', rating: 5 },
-      { user: 'Paul S.', comment: 'My go-to olive oil for everything.', rating: 5 },
+      { user: 'Hermione Granger', comment: 'Perfect for defensive magic and Patronus charms.', rating: 5 },
+      { user: 'Ron Weasley', comment: 'Brilliant wand, saved us countless times.', rating: 5 },
     ],
+    magicalProperties: 'Excellent for protection spells, strong against dark magic',
+    spellLevel: 'Intermediate',
   },
   {
     id: crypto.randomUUID(),
-    name: 'Artisan Coffee Beans (250g)',
-    category: 'Beverages',
-    price: 8.75,
-    quantity: 35,
-    image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Medium roast Arabica coffee beans, ethically sourced. Delivers a rich, smooth flavor with notes of chocolate and nuts.',
+    name: "Hermione's Vine Wood Wand",
+    category: 'Wands',
+    price: 42.00,
+    quantity: 30,
+    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: '10¾ inches, vine wood with dragon heartstring core. Perfect for complex spellwork and transfiguration. Vine wands are drawn to witches and wizards who seek a greater purpose.',
+    rating: 4.8,
+    reviews: [
+      { user: 'Professor McGonagall', comment: 'Exceptional for transfiguration work.', rating: 5 },
+      { user: 'Harry Potter', comment: 'Hermione\'s wand never fails to amaze.', rating: 5 },
+    ],
+    magicalProperties: 'Superior for complex spells and academic magic',
+    spellLevel: 'Advanced',
+  },
+  {
+    id: crypto.randomUUID(),
+    name: 'Custom Wand Builder',
+    category: 'Wands',
+    price: 75.00,
+    quantity: 100,
+    image: 'https://images.pexels.com/photos/8111357/pexels-photo-8111357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Create your perfect wand! Choose from various woods (oak, willow, ebony, holly) and cores (phoenix feather, dragon heartstring, unicorn hair). Each wand is unique and chooses its wizard.',
     rating: 4.7,
     reviews: [
-      { user: 'Quinn T.', comment: 'Great aroma and taste. Perfect start to my day.', rating: 4 },
-      { user: 'Rachel U.', comment: 'Love the freshness of these beans.', rating: 5 },
+      { user: 'Garrick Ollivander', comment: 'Every wand is special when crafted with care.', rating: 5 },
+      { user: 'Luna Lovegood', comment: 'My custom wand feels like it was meant for me.', rating: 5 },
     ],
+    magicalProperties: 'Perfectly matched to your magical signature',
+    spellLevel: 'Beginner',
+  },
+
+  // Potions Category - "Slughorn's Potions Emporium"
+  {
+    id: crypto.randomUUID(),
+    name: 'Felix Felicis (Liquid Luck)',
+    category: 'Potions',
+    price: 500.00,
+    quantity: 5,
+    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'The most coveted potion in the wizarding world. Brings extraordinary luck for 12 hours. Golden in color and incredibly difficult to brew. Use sparingly - too much can cause giddiness and dangerous overconfidence.',
+    rating: 5.0,
+    reviews: [
+      { user: 'Harry Potter', comment: 'Helped me get Slughorn\'s memory. Incredible!', rating: 5 },
+      { user: 'Horace Slughorn', comment: 'My finest brewing achievement.', rating: 5 },
+    ],
+    magicalProperties: 'Grants extraordinary luck and perfect timing',
+    spellLevel: 'Master',
   },
   {
     id: crypto.randomUUID(),
-    name: 'Sharp Cheddar Cheese (200g)',
-    category: 'Dairy & Eggs',
-    price: 5.50,
-    quantity: 45,
-    image: 'https://images.pexels.com/photos/145933/pexels-photo-145933.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Aged sharp cheddar cheese block, perfect for grating, slicing, or enjoying on its own.',
+    name: 'Polyjuice Potion',
+    category: 'Potions',
+    price: 150.00,
+    quantity: 12,
+    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Transform into anyone for one hour. Requires a piece of the person you wish to become. Thick, mudlike consistency with a taste that varies depending on the person being impersonated.',
     rating: 4.6,
     reviews: [
-      { user: 'Sam V.', comment: 'Perfect for mac and cheese. Melts beautifully.', rating: 5 },
-      { user: 'Tina W.', comment: 'Great flavor, good for sandwiches.', rating: 4 },
+      { user: 'Hermione Granger', comment: 'Perfectly brewed, though the taste is awful.', rating: 4 },
+      { user: 'Barty Crouch Jr.', comment: 'Essential for my... activities.', rating: 5 },
     ],
+    magicalProperties: 'Complete physical transformation for 1 hour',
+    spellLevel: 'Advanced',
   },
   {
     id: crypto.randomUUID(),
-    name: 'Italian Spaghetti Pasta (500g)',
-    category: 'Grains & Pasta',
-    price: 1.99,
-    quantity: 80,
-    image: 'https://images.pexels.com/photos/128408/pexels-photo-128408.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Classic Italian durum wheat spaghetti, cooks al dente every time. The foundation for countless delicious meals.',
-    rating: 4.4,
-    reviews: [
-      { user: 'Uma X.', comment: 'Good basic pasta, always have it in my pantry.', rating: 4 },
-      { user: 'Victor Y.', comment: 'Reliable and affordable.', rating: 5 },
-    ],
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Classic Tomato Ketchup (500g)',
-    category: 'Condiments',
-    price: 3.25,
-    quantity: 55,
-    image: 'https://images.pexels.com/photos/1028707/pexels-photo-1028707.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'The classic taste of ripe tomatoes, perfect for burgers, fries, and all your favorite dishes. Family size.',
+    name: 'Amortentia Love Potion',
+    category: 'Potions',
+    price: 85.00,
+    quantity: 20,
+    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'The most powerful love potion in existence. Creates powerful infatuation and obsession. Smells different to each person according to what attracts them most. Pearl-sheen, steam rises in spirals.',
     rating: 4.3,
     reviews: [
-      { user: 'Wendy Z.', comment: 'Kids love it, can\'t go wrong with this.', rating: 4 },
-      { user: 'Xavier A.', comment: 'Standard ketchup, good quality.', rating: 4 },
+      { user: 'Romilda Vane', comment: 'Perfect for getting someone\'s attention!', rating: 5 },
+      { user: 'Professor Slughorn', comment: 'Dangerous if misused. Handle with care.', rating: 4 },
     ],
+    magicalProperties: 'Creates powerful romantic attraction',
+    spellLevel: 'Intermediate',
   },
   {
     id: crypto.randomUUID(),
-    name: 'Organic Frozen Green Peas (1kg)',
-    category: 'Frozen Foods',
-    price: 2.75,
-    quantity: 65,
-    image: 'https://images.pexels.com/photos/1300975/pexels-photo-1300975.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: 'Quick frozen organic green peas, retaining their natural sweetness and nutrients. A convenient addition to any meal.',
-    rating: 4.5,
+    name: 'Complete Potion Brewing Kit',
+    category: 'Potions',
+    price: 125.00,
+    quantity: 35,
+    image: 'https://images.pexels.com/photos/7937474/pexels-photo-7937474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Everything needed to start brewing potions! Includes pewter cauldron, brass scales, glass phials, and essential ingredients like dried nettles, snake fangs, and porcupine quills.',
+    rating: 4.8,
     reviews: [
-      { user: 'Yara B.', comment: 'Convenient and fresh, great for quick dinners.', rating: 5 },
-      { user: 'Zane C.', comment: 'Always good to have in the freezer.', rating: 4 },
+      { user: 'Neville Longbottom', comment: 'Finally, a kit that makes potions easier!', rating: 5 },
+      { user: 'Severus Snape', comment: 'Adequate for beginners, I suppose.', rating: 4 },
     ],
+    magicalProperties: 'Complete brewing setup for aspiring potioneers',
+    spellLevel: 'Beginner',
+  },
+
+  // Flying Equipment - "Quality Quidditch Supplies"
+  {
+    id: crypto.randomUUID(),
+    name: 'Firebolt Supreme Racing Broom',
+    category: 'Flying Equipment',
+    price: 1200.00,
+    quantity: 8,
+    image: 'https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'The fastest racing broom ever created. 0-150mph in 10 seconds with unparalleled precision and control. Handcrafted with ash wood handle and birch twigs. The choice of professional Quidditch players worldwide.',
+    rating: 5.0,
+    reviews: [
+      { user: 'Harry Potter', comment: 'The best broom I\'ve ever flown. Incredible speed!', rating: 5 },
+      { user: 'Viktor Krum', comment: 'Perfect for professional Quidditch.', rating: 5 },
+    ],
+    magicalProperties: 'Unmatched speed and precision in flight',
+    spellLevel: 'Advanced',
   },
   {
     id: crypto.randomUUID(),
-    name: 'Freshly Squeezed Orange Juice (1 Liter)',
-    category: 'Beverages',
-    price: 3.00,
-    quantity: 40,
-    image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    description: '100% pure squeezed orange juice, no added sugar or preservatives. A refreshing and healthy drink.',
-    rating: 4.6,
+    name: 'Nimbus 2001 Professional Broom',
+    category: 'Flying Equipment',
+    price: 800.00,
+    quantity: 15,
+    image: 'https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'The broom that dominated Quidditch before the Firebolt. Excellent acceleration and handling. Mahogany handle with superior balance. Used by the Slytherin Quidditch team.',
+    rating: 4.7,
     reviews: [
-      { user: 'Anna D.', comment: 'Refreshing! Tastes like real oranges.', rating: 4 },
-      { user: 'Ben E.', comment: 'My favorite orange juice.', rating: 5 },
+      { user: 'Draco Malfoy', comment: 'Superior to any Nimbus 2000. Excellent quality.', rating: 5 },
+      { user: 'Marcus Flint', comment: 'Perfect for aggressive Quidditch play.', rating: 4 },
     ],
+    magicalProperties: 'Professional-grade speed and maneuverability',
+    spellLevel: 'Intermediate',
+  },
+  {
+    id: crypto.randomUUID(),
+    name: 'Golden Snitch Set',
+    category: 'Flying Equipment',
+    price: 75.00,
+    quantity: 50,
+    image: 'https://images.pexels.com/photos/8111264/pexels-photo-8111264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Official Quidditch Golden Snitch with flesh memory. Remembers the first person to touch it. Comes with practice Snitches for training. Essential for any Quidditch match or practice session.',
+    rating: 4.9,
+    reviews: [
+      { user: 'Oliver Wood', comment: 'Perfect for Seeker training. High quality!', rating: 5 },
+      { user: 'Cho Chang', comment: 'Excellent flight patterns and responsiveness.', rating: 5 },
+    ],
+    magicalProperties: 'Flesh memory and erratic flight patterns',
+    spellLevel: 'Intermediate',
+  },
+
+  // Magical Foods - "Honeydukes Sweet Shop"
+  {
+    id: crypto.randomUUID(),
+    name: 'Chocolate Frogs',
+    category: 'Magical Foods',
+    price: 8.50,
+    quantity: 100,
+    image: 'https://images.pexels.com/photos/8111358/pexels-photo-8111358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Delicious chocolate frogs that hop around until eaten! Each comes with a collectible Famous Witches and Wizards card. Collect them all! Made with the finest magical chocolate.',
+    rating: 4.8,
+    reviews: [
+      { user: 'Ron Weasley', comment: 'My favorite sweet! Love collecting the cards.', rating: 5 },
+      { user: 'Harry Potter', comment: 'Got Dumbledore on my first try!', rating: 5 },
+    ],
+    magicalProperties: 'Self-hopping chocolate with collectible cards',
+    spellLevel: 'Beginner',
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Bertie Bott's Every Flavour Beans",
+    category: 'Magical Foods',
+    price: 6.25,
+    quantity: 80,
+    image: 'https://images.pexels.com/photos/8111358/pexels-photo-8111358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Risk it all with these magical jelly beans! Flavors include chocolate, peppermint, and liver, tripe, earwax, spinach, and worse! You never know what you\'re going to get.',
+    rating: 4.2,
+    reviews: [
+      { user: 'Dumbledore', comment: 'Alas, earwax! But the good ones are delightful.', rating: 4 },
+      { user: 'Hermione Granger', comment: 'Fascinating magic, terrible spinach flavor.', rating: 4 },
+    ],
+    magicalProperties: 'Truly every flavor imaginable, good and bad',
+    spellLevel: 'Beginner',
+  },
+  {
+    id: crypto.randomUUID(),
+    name: 'Butterbeer',
+    category: 'Magical Foods',
+    price: 4.50,
+    quantity: 200,
+    image: 'https://images.pexels.com/photos/8111358/pexels-photo-8111358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'The wizarding world\'s favorite beverage! Warming, butterscotch-flavored drink with a slight alcoholic content. Perfect for cold days in Hogsmeade. Served hot or cold with foam on top.',
+    rating: 4.9,
+    reviews: [
+      { user: 'Hermione Granger', comment: 'Perfectly warming and delicious!', rating: 5 },
+      { user: 'Hagrid', comment: 'Nothing beats a good butterbeer by the fire.', rating: 5 },
+    ],
+    magicalProperties: 'Warming properties, slight magical enhancement',
+    spellLevel: 'Beginner',
+  },
+
+  // Magical Accessories - "Magical Menagerie & More"
+  {
+    id: crypto.randomUUID(),
+    name: 'Invisibility Cloak',
+    category: 'Magical Accessories',
+    price: 1500.00,
+    quantity: 3,
+    image: 'https://images.pexels.com/photos/8111359/pexels-photo-8111359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'True invisibility cloak woven from Demiguise hair. Provides complete invisibility and is resistant to most revealing charms. One size fits all. Passed down through generations of the Potter family.',
+    rating: 5.0,
+    reviews: [
+      { user: 'Harry Potter', comment: 'Invaluable for midnight adventures!', rating: 5 },
+      { user: 'James Potter', comment: 'Perfect for mischief and mayhem.', rating: 5 },
+    ],
+    magicalProperties: 'Complete invisibility, resistant to detection',
+    spellLevel: 'Master',
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Marauder's Map",
+    category: 'Magical Accessories',
+    price: 250.00,
+    quantity: 10,
+    image: 'https://images.pexels.com/photos/8111359/pexels-photo-8111359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'I solemnly swear I am up to no good. This magical map shows every person\'s location within Hogwarts, including secret passages. Created by Messrs. Moony, Wormtail, Padfoot, and Prongs.',
+    rating: 4.9,
+    reviews: [
+      { user: 'Fred Weasley', comment: 'Our greatest treasure! Endless possibilities.', rating: 5 },
+      { user: 'George Weasley', comment: 'Perfect for avoiding Filch and finding trouble.', rating: 5 },
+    ],
+    magicalProperties: 'Shows all people and secret passages in real-time',
+    spellLevel: 'Advanced',
+  },
+  {
+    id: crypto.randomUUID(),
+    name: 'Time-Turner',
+    category: 'Magical Accessories',
+    price: 2000.00,
+    quantity: 2,
+    image: 'https://images.pexels.com/photos/8111359/pexels-photo-8111359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Extremely rare magical device that allows the user to travel back in time up to 5 hours. Requires special Ministry permission. Golden hourglass pendant on a long chain. Use with extreme caution.',
+    rating: 5.0,
+    reviews: [
+      { user: 'Hermione Granger', comment: 'Invaluable for attending multiple classes!', rating: 5 },
+      { user: 'Professor McGonagall', comment: 'Dangerous but necessary for exceptional students.', rating: 5 },
+    ],
+    magicalProperties: 'Time travel up to 5 hours in the past',
+    spellLevel: 'Master',
+  },
+
+  // Dark Arts Defense
+  {
+    id: crypto.randomUUID(),
+    name: 'Protective Charms Bundle',
+    category: 'Dark Arts Defense',
+    price: 180.00,
+    quantity: 25,
+    image: 'https://images.pexels.com/photos/8111360/pexels-photo-8111360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    description: 'Complete collection of protective charms and amulets. Includes Protean Charm items, Shield Charm enhancers, and anti-jinx accessories. Essential for anyone facing dark magic threats.',
+    rating: 4.7,
+    reviews: [
+      { user: 'Auror Kingsley', comment: 'Professional-grade protection. Highly recommended.', rating: 5 },
+      { user: 'Neville Longbottom', comment: 'Gave me confidence against Death Eaters.', rating: 5 },
+    ],
+    magicalProperties: 'Multi-layered magical protection against dark arts',
+    spellLevel: 'Advanced',
   },
 ];
 
 export const MOCK_USERS: User[] = [
   {
     id: crypto.randomUUID(),
-    name: 'John Doe',
-    email: 'john@example.com',
-    password: 'password123', // For mock auth. NEVER store plain passwords in a real app!
+    name: 'Harry Potter',
+    email: 'harry@hogwarts.edu',
+    password: 'hedwig123',
     addresses: [
-      { id: crypto.randomUUID(), street: '123 Main St', city: 'Anytown', state: 'CA', zip: '90210', country: 'USA' },
-      { id: crypto.randomUUID(), street: '456 Oak Ave', city: 'Sometown', state: 'NY', zip: '10001', country: 'USA' },
+      { id: crypto.randomUUID(), street: '4 Privet Drive', city: 'Little Whinging', state: 'Surrey', zip: 'RG12 9XX', country: 'UK', magicalLocation: 'Near Muggle London' },
+      { id: crypto.randomUUID(), street: 'Gryffindor Tower', city: 'Hogwarts', state: 'Scotland', zip: 'H0G 1W4', country: 'UK', magicalLocation: 'Hogwarts School of Witchcraft and Wizardry' },
     ],
     paymentMethods: [
-      { id: crypto.randomUUID(), type: 'Credit Card', last4: '4242' },
-      { id: crypto.randomUUID(), type: 'Cash on Delivery' },
+      { id: crypto.randomUUID(), type: 'Galleons', bankName: 'Gringotts Wizarding Bank' },
+      { id: crypto.randomUUID(), type: 'Muggle Card', last4: '4242' },
     ],
-    loyaltyStatus: 'Gold Member',
+    loyaltyStatus: 'Order of Merlin - First Class',
     autoReplenishment: [
-      { productId: MOCK_PRODUCTS[2].id, frequency: 'weekly', quantity: 1 }, // Milk
+      { productId: MOCK_PRODUCTS.find(p => p.name === 'Butterbeer')?.id || '', frequency: 'weekly', quantity: 6 },
     ],
+    hogwartsHouse: 'Gryffindor',
+    wizardLevel: 85,
+    wandType: 'Holly and Phoenix Feather',
   },
 ];
 
 export const MOCK_CATEGORIES: string[] = [
-  'Fruits & Vegetables',
-  'Bakery',
-  'Dairy & Eggs',
-  'Grains & Pasta',
-  'Meat & Seafood',
-  'Pantry Staples',
-  'Beverages',
-  'Condiments',
-  'Frozen Foods',
+  'Wands',
+  'Potions',
+  'Flying Equipment',
+  'Magical Foods',
+  'Magical Accessories',
+  'Dark Arts Defense',
 ];
 
 export const MOCK_ORDERS: Order[] = [
@@ -321,28 +416,15 @@ export const MOCK_ORDERS: Order[] = [
     id: crypto.randomUUID(),
     userId: MOCK_USERS[0].id,
     items: [
-      { productId: MOCK_PRODUCTS[0].id, name: MOCK_PRODUCTS[0].name, price: MOCK_PRODUCTS[0].price, quantity: 2, image: MOCK_PRODUCTS[0].image },
-      { productId: MOCK_PRODUCTS[2].id, name: MOCK_PRODUCTS[2].name, price: MOCK_PRODUCTS[2].price, quantity: 1, image: MOCK_PRODUCTS[2].image },
+      { productId: MOCK_PRODUCTS[0].id, name: MOCK_PRODUCTS[0].name, price: MOCK_PRODUCTS[0].price, quantity: 1, image: MOCK_PRODUCTS[0].image },
+      { productId: MOCK_PRODUCTS[8].id, name: MOCK_PRODUCTS[8].name, price: MOCK_PRODUCTS[8].price, quantity: 3, image: MOCK_PRODUCTS[8].image },
     ],
-    total: (MOCK_PRODUCTS[0].price * 2) + MOCK_PRODUCTS[2].price + ((MOCK_PRODUCTS[0].price * 2) + MOCK_PRODUCTS[2].price) * 0.08, // Including mock tax
+    total: MOCK_PRODUCTS[0].price + (MOCK_PRODUCTS[8].price * 3) + ((MOCK_PRODUCTS[0].price + (MOCK_PRODUCTS[8].price * 3)) * 0.08),
     status: 'Delivered',
     orderDate: '2024-07-20',
-    deliveryAddress: MOCK_USERS[0].addresses[0],
-    deliverySlot: { date: '2024-07-21', time: '10:00 AM - 12:00 PM' },
-    paymentMethod: 'Credit Card',
-  },
-  {
-    id: crypto.randomUUID(),
-    userId: MOCK_USERS[0].id,
-    items: [
-      { productId: MOCK_PRODUCTS[1].id, name: MOCK_PRODUCTS[1].name, price: MOCK_PRODUCTS[1].price, quantity: 1, image: MOCK_PRODUCTS[1].image },
-      { productId: MOCK_PRODUCTS[3].id, name: MOCK_PRODUCTS[3].name, price: MOCK_PRODUCTS[3].price, quantity: 1, image: MOCK_PRODUCTS[3].image },
-    ],
-    total: MOCK_PRODUCTS[1].price + MOCK_PRODUCTS[3].price + (MOCK_PRODUCTS[1].price + MOCK_PRODUCTS[3].price) * 0.08, // Including mock tax
-    status: 'Processing',
-    orderDate: '2024-07-25',
-    deliveryAddress: MOCK_USERS[0].addresses[0],
-    deliverySlot: { date: '2024-07-26', time: '02:00 PM - 04:00 PM' },
-    paymentMethod: 'Cash on Delivery',
+    deliveryAddress: MOCK_USERS[0].addresses[1],
+    deliverySlot: { date: '2024-07-21', time: 'Morning Owl Post' },
+    paymentMethod: 'Galleons',
+    deliveryMethod: 'Express Phoenix Delivery',
   },
 ];
